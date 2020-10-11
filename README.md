@@ -24,17 +24,17 @@ ___
 
 ## Voraussetzungen
 
-Die zu berabeitende Tabelle, braucht einen tbody-Tag.
-
 Wird die Tabelle per Script aufgebaut, muß diese vollständig sein, bevor die Funktion gestartet wird.
+
+Z. B. Aufruf in Datatables im Callback "initComplete".
 
 ## Anleitung
 
 CSS:
 ``` CSS
 .mSpan { display: inline-block; padding: .1em; min-width: 4em; border-radius: .3em; }
-.minS { background-color: #DF0101; color: white; }
-.maxS { background-color: #01DFA4; color: black; }
+.min { background-color: #DF0101; color: white; }
+.max { background-color: #01DFA4; color: black; }
 ```
 
 Aufruf per DATA-
@@ -42,8 +42,8 @@ Aufruf per DATA-
 <table
   data-search-mode="col"
   data-search-nr="1"
-  data-min-css="minS mSpan"
-  data-mxn-css="maxS mSpan"
+  data-css-min="min mSpan"
+  data-css-max="max mSpan"
   >
   <thead>
     <tr>
@@ -82,14 +82,13 @@ Aufruf über Optionen:
 ```
 ``` JavaScript
 tableMinMax({
-  "id": "table",
   "search": {
     "mode": "row",
     "nr": "1"
   },
   "css": {
-    "min": "minS mSpan",
-    "max": "maxS mSpan"
+    "min": "min mSpan",
+    "max": "max mSpan"
   },
   "colorize": "span"
 });
