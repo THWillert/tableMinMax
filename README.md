@@ -3,8 +3,13 @@
 ## Übersicht
 JavaScript that colors the min / max values of a HTML table.
 
-JavaScript das die Minimum / Maximum Werte, einer HTMLTabelle einfärbt.
+JavaScript das die Minimum / Maximum Werte, einer HTML-Tabelle einfärbt.
 
+____
+
+![Ergebnis](/images/tableMinMax.png)
+
+Im Beispiel: Spaltenweise Min/Max-Werte
 
 ### Features
 
