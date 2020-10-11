@@ -41,6 +41,7 @@ Aufruf per DATA-
 ``` html
 <table
   data-search-mode="col"
+  data-search-nr="1"
   data-min-css="minS mSpan"
   data-mxn-css="maxS mSpan"
   >
@@ -84,7 +85,7 @@ tableMinMax({
   "id": "table",
   "search": {
     "mode": "row",
-    "nr": "0"
+    "nr": "1"
   },
   "css": {
     "min": "minS mSpan",
