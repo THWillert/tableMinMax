@@ -80,7 +80,8 @@ tableMinMax = function(oOptions) {
         oTable = null,
         oTbody = null,
         min_c = null,
-        max_c = null
+        max_c = null,
+	val = 0
 
      // simple parameter-check =================================================
     try{
