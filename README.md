@@ -24,9 +24,9 @@ ___
 
 ## Voraussetzungen
 
-Benötigt jQuery. Das wird noch entfernt.
-
 Die zu berabeitende Tabelle, braucht einen tbody-Tag.
+
+Wird die Tabelle per Script aufgebaut, muß diese vollständig sein, bevor die Funktion gestartet wird.
 
 ## Anleitung
 
@@ -99,7 +99,7 @@ tableMinMax({
 
 ## ToDo
 
-- [ ] Abhängkeit von jQuery entfernen
+- [x] Abhängkeit von jQuery entfernen
 - [ ] Parameter überprüfen
 - [ ] Mehrere Spalten / Reiehen gleichzeitig übergeben
 - [ ] gleiche Werte ebenfalls markieren
