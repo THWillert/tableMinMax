@@ -1,13 +1,19 @@
 // (c) 2020 Thorsten Willert
-// V1.0
+// V1.1
 // This code is licensed under MIT license
 
 tableMinMax = function(oOptions) {
-
-
-
 /*
 	Sets css-classes to the min/max-values in a table, row or column.
+--------------------------------------------------------------------------------
+
+	V1.1
+	- fixed error in default value: search.nr = 1 instead of 0
+	- fixed error with multiple calls on the same table
+	- optimized some code
+	- removed parameter "id"
+
+--------------------------------------------------------------------------------
 
     Returns:
     	array [min, max]
@@ -18,10 +24,6 @@ tableMinMax = function(oOptions) {
 	Options:
 		[default]
 		(data-attribute) overrides options
-
-	id [table]
-		id for the created spans
-		id e.g. = "ID-" + id + "-max" + cell-number;
 
 	table [table]
 		table objekt, name, class, id ...
@@ -52,15 +54,14 @@ tableMinMax = function(oOptions) {
 	*/
 
 	let settings = extend({
-        id: 'table',
         table: 'table',
         search: {
             mode: 'col',
-            nr: 0
+            nr: 1
         },
         css: {
-            max: 'table_max',
-            min: 'table_min'
+            max: '',
+            min: ''
         },
         colorize: 'span',
         mode: 'single',
@@ -77,11 +78,13 @@ tableMinMax = function(oOptions) {
         iCols = 0,
         iRows = 0,
         oTable = null,
-        oTbody = null
+        oTbody = null,
+        min_c = null,
+        max_c = null
 
      // simple parameter-check =================================================
     try{
-    	settings.search.nr -= 1;
+    	settings.search.nr = settings.search.nr - 1;
 
     	oTable = document.querySelector(settings.table)
     	if (oTable === null) {
@@ -90,10 +93,6 @@ tableMinMax = function(oOptions) {
     	}
 
     	oTbody = document.querySelector(settings.table + ' tbody')
-    	if (oTbody === null) {
-    		console.log( 'tableMinMax: tbody not found: ' + settings.table)
-    		return [-1,-1]
-    	}
     	iRows = oTbody.rows.length;
 
     } catch (e) {
@@ -104,13 +103,15 @@ tableMinMax = function(oOptions) {
     // data ====================================================================
 
     if (oTable.hasAttribute("data-search-mode"))
-        settings.search.mode = document.querySelector(settings.table).getAttribute("data-search-mode");
+        settings.search.mode = oTable.getAttribute("data-search-mode");
     if (oTable.hasAttribute("data-search-nr"))
-        settings.search.nr = document.querySelector(settings.table).getAttribute("data-search-nr");
-    if (oTable.hasAttribute("data-min-css"))
-        settings.css.min = document.querySelector(settings.table).getAttribute("data-min-css");
-    if (oTable.hasAttribute("data-max-css"))
-        settings.css.max = document.querySelector(settings.table).getAttribute("data-max-css");
+        settings.search.nr = oTable.getAttribute("data-search-nr");
+    if (oTable.hasAttribute("data-css-min"))
+        settings.css.min = oTable.getAttribute("data-css-min");
+    if (oTable.hasAttribute("data-css-max"))
+        settings.css.max = oTable.getAttribute("data-css-max");
+    if (oTable.hasAttribute("data-colorize"))
+        settings.css.max = oTable.getAttribute("data-colorize");
 
     // search min / max ========================================================
     switch (settings.search.mode.toString()) {
@@ -187,6 +188,7 @@ tableMinMax = function(oOptions) {
     }
 
     // -------------------------------------------------------------------------
+    // invert min / max colors
     if (settings.invert === true) {
         [min_c, max_c] = [max_c, min_c];
     }
@@ -199,13 +201,8 @@ tableMinMax = function(oOptions) {
 
     } else {
 
-        let id = 'ID-' + settings.id + '-min' + min_i;
-        min_c.innerHTML = `<span id="${id}">` + min_c.innerHTML + '</span>'
-        document.getElementById(id).className += settings.css.min;
-
-        id = 'ID-' + settings.id + '-max' + max_i;
-        max_c.innerHTML = `<span id="${id}">` + max_c.innerHTML + '</span>'
-        document.getElementById(id).className += settings.css.max;
+        min_c.innerHTML = '<span class="' + settings.css.min + '">' + min_c.innerHTML + '</span>';
+        max_c.innerHTML = '<span class="' + settings.css.max + '">' + max_c.innerHTML + '</span>';
     }
     //--------------------------------------------------------------------------
 
