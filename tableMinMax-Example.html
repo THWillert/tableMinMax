@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>tableMinMax Example</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="tableMinMax.js"></script>
+	<style>
+	table td {
+		padding: 5px;
+		text-align: center;
+	}
+
+	.mSpan {
+		display: inline-block;
+		padding: 0.1em;
+		min-width: 4em;
+		border-radius: 0.3em;
+	}
+
+	.minS {
+		background-color: #DF0101;
+		color: white;
+	}
+
+	.maxS {
+		background-color: #01DFA4;
+		color: black;
+	}
+
+	.mCell {
+		border-radius: 0.3em;
+		border: solid 1px black
+	}
+
+	.minC {
+		background-color: #DF0101;
+		color: white;
+	}
+
+	.maxC {
+		background-color: #01DFA4;
+		color: black;
+	}
+	</style>
+	<script>
+	$(document).ready(function() {
+
+		// fill table with random values
+		$("table tbody td").each(function(index, cell) {
+			var value = parseFloat((Math.random() * 201) - 100).toPrecision(5);
+			$(this).text(value);
+		});
+
+		tableMinMax({
+			"id": "table",
+			"search": {
+				"mode": "row",
+				"nr": "6"
+			},
+			"css": {
+				"min": 'minS mSpan',
+				"max": 'maxS mSpan'
+			},
+			"colorize": "span"
+		});
+	});
+	</script>
+</head>
+
+<body>
+	<table data-search-mode="all" data-min-css="minS mSpan">
+		<thead>
+			<tr>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+				<th>10</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
