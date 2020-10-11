@@ -6,13 +6,42 @@
 	<title>tableMinMax Example</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="tableMinMax.js"></script>
+
+	<script>
+	$(document).ready(function() {
+
+		// fill table with random values
+		$("table tbody td").each(function(index, cell) {
+			var value = parseFloat((Math.random() * 201) - 100).toPrecision(5);
+			$(this).text(value);
+		});
+
+
+		let ret = tableMinMax({
+			"id": "col",
+			"search": {
+				"mode": "all",
+				"nr": "3"
+			},
+			"css": {
+				"min": 'minS mSpan',
+				"max": 'maxS mSpan'
+			},
+			"colorize": "span"
+		});
+		console.log(ret);
+
+
+	});
+
+
+	</script>
 	<style>
 	table td {
 		padding: 5px;
 		text-align: center;
 	}
 
-	/* classes for span */
 	.mSpan {
 		display: inline-block;
 		padding: 0.1em;
@@ -29,8 +58,6 @@
 		background-color: #01DFA4;
 		color: black;
 	}
-		
-	/* classes for td */
 
 	.mCell {
 		border-radius: 0.3em;
@@ -47,33 +74,11 @@
 		color: black;
 	}
 	</style>
-	<script>
-	$(document).ready(function() {
 
-		// fill table with random values
-		$("table tbody td").each(function(index, cell) {
-			var value = parseFloat((Math.random() * 201) - 100).toPrecision(5);
-			$(this).text(value);
-		});
-
-		tableMinMax({
-			"id": "table",
-			"search": {
-				"mode": "row",
-				"nr": "6"
-			},
-			"css": {
-				"min": 'minS mSpan',
-				"max": 'maxS mSpan'
-			},
-			"colorize": "span"
-		});
-	});
-	</script>
 </head>
 
 <body>
-	<table data-search-mode="all" data-min-css="minS mSpan">
+	<table>
 		<thead>
 			<tr>
 				<th>1</th>
@@ -163,6 +168,11 @@
 			</tr>
 		</tbody>
 	</table>
+	<script>
+
+
+
+	</script>
 </body>
 
 </html>
