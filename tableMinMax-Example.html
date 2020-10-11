@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<title>tableMinMax Example</title>
@@ -16,20 +15,47 @@
 			$(this).text(value);
 		});
 
-
-		let ret = tableMinMax({
-			"id": "col",
+		// min / max column 3
+		ret = tableMinMax({
 			"search": {
-				"mode": "all",
+				"mode": "col",
 				"nr": "3"
 			},
 			"css": {
-				"min": 'minS mSpan',
-				"max": 'maxS mSpan'
+				"min": 'min mSpan',
+				"max": 'max mSpan'
 			},
 			"colorize": "span"
 		});
-		console.log(ret);
+		console.log(ret)
+
+		// min / max column 4
+		ret = tableMinMax({
+			"search": {
+				"mode": "col",
+				"nr": "4"
+			},
+			"css": {
+				"min": 'min mSpan',
+				"max": 'max mSpan'
+			},
+			"colorize": "span"
+		});
+		console.log(ret)
+
+		// min / max table
+		ret = tableMinMax({
+			"search": {
+				"mode": "all",
+			},
+			"css": {
+				"min": 'minT mCell',
+				"max": 'maxT mCell'
+			},
+			"colorize": "cell"
+		});
+		console.log(ret)
+
 
 
 	});
@@ -49,30 +75,30 @@
 		border-radius: 0.3em;
 	}
 
-	.minS {
-		background-color: #DF0101;
-		color: white;
-	}
-
-	.maxS {
-		background-color: #01DFA4;
-		color: black;
-	}
-
 	.mCell {
 		border-radius: 0.3em;
-		border: solid 1px black
 	}
 
-	.minC {
+	.min {
 		background-color: #DF0101;
 		color: white;
 	}
 
-	.maxC {
+	.max {
 		background-color: #01DFA4;
 		color: black;
 	}
+
+	.maxT {
+		background-color: #0099ff;
+		color: white;
+	}
+
+	.minT {
+		background-color: #ffcc00;
+		color: black;
+	}
+
 	</style>
 
 </head>
@@ -168,11 +194,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<script>
-
-
-
-	</script>
 </body>
 
 </html>
