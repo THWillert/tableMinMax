@@ -1,65 +1,66 @@
 // (c) 2020 Thorsten Willert
-// V1.1
+// V1.2
 // This code is licensed under MIT license
-
 tableMinMax = function(oOptions) {
-/*
-	Sets css-classes to the min/max-values in a table, row or column.
---------------------------------------------------------------------------------
+    /*
+    	Sets css-classes to the min/max-values in a table, row or column.
+    --------------------------------------------------------------------------------
 
-	V1.1
-	- fixed error in default value: search.nr = 1 instead of 0
-	- fixed error with multiple calls on the same table
-	- optimized some code
-	- removed parameter "id"
+    	V1.1
+    	- fixed error in default value: search.nr = 1 instead of 0
+    	- fixed error with multiple calls on the same table
+    	- optimized some code
+    	- removed parameter "id"
 
---------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------
 
-    Returns:
-    	array [min, max]
-    	on error [-1,-1}
+        Returns:
+        	array [min, max]
+        	on error [-1,-1}
 
---------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------
 
-	Options:
-		[default]
-		(data-attribute) overrides options
+    	Options:
+    		[default]
+    		(data-attribute) overrides options
 
-	table [table]
-		table objekt, name, class, id ...
+    	table [table]
+    		table objekt, name, class, id ...
 
-	search (data-search-mode)
-		mode [all]
-			all: the complete table
-			row: single-row number
-			col: single-column number
-		nr:
-			row / col number: 0-x
+    	search (data-search-mode)
+    		mode [all]
+    			all: the complete table
+    			row: single-row number
+    			col: single-column number
+    		nr:
+    			row / col number: 1-x
 
-	(mode - ToDo
-		single: minimum / maxium values are marked
-		multi: all values with the same min / max are marked)
+    	ToDo mode
+    		single: minimum / maxium values are marked
+    		multi: all values with the same min / max are marked)
 
-	css
-		max: class(es) for maximum value  (data-min-css)
-		min: class(es) for minimum value  (data-max-css)
+    	css
+    		ToDo mode: {style} style | class
+    		max: class(es) or style for maximum value  (data-min-css)
+    		min: class(es) or style for minimum value  (data-max-css)
 
-	colorize [span]
-		cell: css added to the cell
-		span: css added to a span with the current value inside + id for the span
+    	colorize [span]
+    		cell: css added to the cell
+    		span: css added to a span with the current value inside + id for the span
 
-	invert:
-		true: min / max classes are swaped
+    	invert:
+    		true: min / max classes are swaped
 
-	*/
+    	*/
 
-	let settings = extend({
+    let settings = extend({
         table: 'table',
         search: {
-            mode: 'col',
+            mode: 'all',
             nr: 1
         },
         css: {
+            mode: 'style',
             max: '',
             min: ''
         },
@@ -68,7 +69,7 @@ tableMinMax = function(oOptions) {
         invert: false
     }, oOptions);
 
-     // init ===================================================================
+    // init ===================================================================
     let min = Number.MAX_VALUE,
         max = Number.MIN_VALUE,
         min_i = 0,
@@ -80,46 +81,55 @@ tableMinMax = function(oOptions) {
         oTable = null,
         oTbody = null,
         min_c = null,
-        max_c = null,
-	val = 0
+        max_c = null
 
-     // simple parameter-check =================================================
-    try{
-    	settings.search.nr = settings.search.nr - 1;
+    // 1. simple parameter-check ==============================================
+    try {
+        oTable = document.querySelector(settings.table)
+        if (oTable === null) {
+            console.log('tableMinMax: table not found: ' + settings.table + "\n" +
+                "Function call after table init? (e.g. end of body)")
+            return [-1, -1]
+        }
 
-    	oTable = document.querySelector(settings.table)
-    	if (oTable === null) {
-    		console.log( 'tableMinMax: table not found: ' +  settings.table)
-    		return [-1,-1]
-    	}
-
-    	oTbody = document.querySelector(settings.table + ' tbody')
-    	iRows = oTbody.rows.length;
+        oTbody = document.querySelector(settings.table + ' tbody')
+        iRows = oTbody.rows.length;
 
     } catch (e) {
-    	console.error(e);
-    	return [-1,-1]
+        console.error(e);
+        return [-1, -1]
     }
 
     // data ====================================================================
 
     if (oTable.hasAttribute("data-search-mode"))
         settings.search.mode = oTable.getAttribute("data-search-mode");
+
     if (oTable.hasAttribute("data-search-nr"))
         settings.search.nr = oTable.getAttribute("data-search-nr");
+    settings.search.nr = Math.abs(settings.search.nr - 1);
+
+    /*
+    if (oTable.hasAttribute("data-css-mode"))
+        settings.css.mode = oTable.getAttribute("data-css-mode");
+    */
     if (oTable.hasAttribute("data-css-min"))
         settings.css.min = oTable.getAttribute("data-css-min");
+
     if (oTable.hasAttribute("data-css-max"))
         settings.css.max = oTable.getAttribute("data-css-max");
+
     if (oTable.hasAttribute("data-colorize"))
         settings.css.max = oTable.getAttribute("data-colorize");
+
+
 
     // search min / max ========================================================
     switch (settings.search.mode.toString()) {
         // ---------------------------------------------------------------------
         case 'col':
-
             // search min / max values in column
+
             for (let i = 0; i < iRows; i++) {
 
                 val = parseFloat(oTbody.rows[i].cells[settings.search.nr].innerText);
@@ -140,9 +150,10 @@ tableMinMax = function(oOptions) {
             break;
             // ---------------------------------------------------------------------
         case 'row':
+            // search min / max values in row
+
             iCols = oTbody.rows[settings.search.nr].cells.length
 
-            // search min / max values in row
             for (let i = 0; i < iCols; i++) {
 
                 val = parseFloat(oTbody.rows[settings.search.nr].cells[i].innerText);
@@ -195,15 +206,15 @@ tableMinMax = function(oOptions) {
     }
 
     // set classes to cell / span
-    if (settings.colorize === 'cell') {
-
-    	min_c.className += settings.css.min;
-        max_c.className += settings.css.max;
-
-    } else {
+    if (settings.colorize === 'span') {
 
         min_c.innerHTML = '<span class="' + settings.css.min + '">' + min_c.innerHTML + '</span>';
         max_c.innerHTML = '<span class="' + settings.css.max + '">' + max_c.innerHTML + '</span>';
+
+    } else {
+
+        min_c.className += settings.css.min;
+        max_c.className += settings.css.max;
     }
     //--------------------------------------------------------------------------
 
