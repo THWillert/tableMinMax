@@ -28,7 +28,7 @@ Wird die Tabelle per Script aufgebaut, muß diese vollständig sein, bevor die F
 
 Z. B. Aufruf in Datatables im Callback "initComplete".
 
-## Anleitung
+## Beispiele
 
 CSS:
 ``` CSS
@@ -39,58 +39,70 @@ CSS:
 
 Aufruf per DATA-
 ``` html
-<table
-  data-search-mode="col"
-  data-search-nr="1"
-  data-css-min="min mSpan"
-  data-css-max="max mSpan"
-  >
-  <thead>
-    <tr>
-      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
-    </tr>
-  </thead>
-  <tbody>
-     <tr>
-      <td>3435</td>-345<td>234</td>2344<td>567</td>3<td>87</td><td>234</td><td>432</td>
-    </tr>
-  </tbody>
-</table>
+ <table id="example1"
+    data-search-mode="all"
+    data-css-min="min mSpan"
+    data-css-max="max mSpan">
+        <thead>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>3435</td>
+                <td>234</td>
+                <td>567</td>
+                <td>87</td>
+                <td>234</td>
+                <td>432</td>
+            </tr>
+...
 ```
 ``` JavaScript
- tableMinMax();
+tableMinMax({
+  "table": "#example1"
+});
 ```
 ____
 
 Aufruf über Optionen:
 ``` html
-<table>
-  <thead>
-    <tr>
-      <th>1</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>3</td></tr>
-    <tr><td>456</td></tr>
-    <tr><td>3</td></tr>
-    <tr><td>-456</td></tr>
-    <tr><td>34</td></tr>
-    <tr><td>23</td></tr>
-  </tbody>
-</table>
+<table id="example2">
+        <thead>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>35</td>
+                <td>234</td>
+                <td>567</td>
+                <td>87</td>
+                <td>234</td>
+                <td>432</td>
+            </tr>
+...
 ```
 ``` JavaScript
 tableMinMax({
-  "search": {
-    "mode": "row",
-    "nr": "1"
-  },
-  "css": {
-    "min": "min mSpan",
-    "max": "max mSpan"
-  },
-  "colorize": "span"
+  "table": "#example2",
+    "css": {
+      "min": "minT",
+      "max": "maxT"
+    },
+  "colorize": "cell"
 });
 ```
 > 
