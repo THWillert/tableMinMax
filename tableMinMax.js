@@ -1,5 +1,5 @@
 // (c) 2020 Thorsten Willert
-// V1.2
+// V1.3
 // This code is licensed under MIT license
 tableMinMax = function(oOptions) {
     /*
