@@ -1,0 +1,10 @@
+{
+	"name": "tableMinMax",
+	"version": "1.3",
+	"description": "JavaScript that colors the min / max values of a HTML table.",
+	"main": "tableMinMax.js",
+	"author": {
+		"name": "Thorsten Willert",
+		"url": "https://www.thorsten-willert.de"
+	}
+ }
