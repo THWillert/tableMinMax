@@ -24,9 +24,15 @@ ___
 
 ## Voraussetzungen
 
+Das Script muss am Ende der Seite aufgerufen werden, oder z. B. bei Verwendung von **jQuery** innerhalb von
+``` JavaScript
+$(document).ready(function() {
+});
+```
+
 Wird die Tabelle per Script aufgebaut, muß diese vollständig sein, bevor die Funktion gestartet wird.
 
-Z. B. Aufruf in Datatables im Callback "initComplete".
+Z. B. Aufruf in **Datatables** im Callback "initComplete".
 
 ## Beispiele
 
