@@ -1,3 +1,6 @@
+V1.41
+- fixed: automatic contrast mode
+
 V1.4
 - added automatic contrast mode for the text
 
