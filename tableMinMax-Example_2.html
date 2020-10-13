@@ -2,199 +2,209 @@
 <html>
 
 <head>
-	<meta charset="utf-8" (>
-	<title>tableMinMax Example 2</title>
-	<script src="tableMinMax.js"></script>
+    <meta charset="utf-8" (>
+    <title>tableMinMax Example 2</title>
+    <script src="tableMinMax.js"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/color2k@1.1.0/index.js"
+            integrity="sha256-yCiK7OHQWsGGc5O9R0OJxGfpLHSqYGq3J2ptgI+Ngqk="
+            crossorigin="anonymous">
+    </script>
 
-	<style>
-	td,
-	th {
-		width: 5em;
-		text-align: center;
-		border: solid 1px gray;
-	}
+    <style>
+        td,
+        th {
+            width: 5em;
+            text-align: center;
+            border: solid 1px gray;
+        }
 
-	.mSpan {
-		display: inline-block;
-		padding: .1em;
-		min-width: 3em;
-		border-radius: .3em;
-	}
+        .mSpan {
+            display: inline-block;
+            padding: .1em;
+            min-width: 3em;
+            border-radius: .3em;
+        }
 
-	.min {
-		background-color: #DF0101;
-		color: white;
-	}
+        .min {
+            background-color: #DF0101;
 
-	.max {
-		background-color: #01DFA4;
-		color: black;
-	}
+        }
 
-	.maxT {
-		background-color: #2F64FF;
-		color: white;
-	}
+        .max {
+            background-color: #01DFA4;
 
-	.minT {
-		background-color: #FEBF00;
-		color: black;
-	}
-	</style>
+        }
+
+        .maxT {
+            background-color: #2F64FF;
+
+        }
+
+        .minT {
+            background-color: #FEBF00;
+
+        }
+    </style>
 </head>
 
 <body>
-	<table id="example1"
-	data-search-mode="all"
-	data-css-min="min mSpan"
-	data-css-max="max mSpan">
-		<thead>
-			<tr>
-				<th>1</th>
-				<th>2</th>
-				<th>3</th>
-				<th>4</th>
-				<th>5</th>
-				<th>6</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>3435</td>
-				<td>234</td>
-				<td>567</td>
-				<td>87</td>
-				<td>234</td>
-				<td>432</td>
-			</tr>
-				<tr>
-				<td>34</td>
-				<td>23</td>
-				<td>57</td>
-				<td>7</td>
-				<td>34</td>
-				<td>472</td>
-			</tr>
-				<tr>
-				<td>3435</td>
-				<td>234</td>
-				<td>567</td>
-				<td>87</td>
-				<td>234</td>
-				<td>432</td>
-			</tr>
-		</tbody>
-	</table>
-	<hr>
-	<table id="example2">
-		<thead>
-			<tr>
-				<th>1</th>
-				<th>2</th>
-				<th>3</th>
-				<th>4</th>
-				<th>5</th>
-				<th>6</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>35</td>
-				<td>234</td>
-				<td>567</td>
-				<td>87</td>
-				<td>234</td>
-				<td>432</td>
-			</tr>
-				<tr>
-				<td>34</td>
-				<td>23</td>
-				<td>57</td>
-				<td>7</td>
-				<td>34</td>
-				<td>472</td>
-			</tr>
-				<tr>
-				<td>35</td>
-				<td>234</td>
-				<td>567</td>
-				<td>87</td>
-				<td>234</td>
-				<td>432</td>
-			</tr>
-		</tbody>
-	</table>
-	<hr>
-<!-- ############################################### -->
-	<table id="example3">
-		<thead>
-			<tr>
-				<th>1</th><th>2</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>3</td><td>3</td>
-			</tr>
-			<tr>
-				<td>456</td><td>5</td>
-			</tr>
-			<tr>
-				<td>3</td><td>-12</td>
-			</tr>
-			<tr>
-				<td>-456</td><td>-43</td>
-			</tr>
-			<tr>
-				<td>34</td><td>78</td>
-			</tr>
-			<tr>
-				<td>23</td><td>34</td>
-			</tr>
+    <table id="example1" data-search-mode="all" data-css-min="min mSpan" data-css-max="max mSpan">
+        <thead>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>3435</td>
+                <td>234</td>
+                <td>567</td>
+                <td>87</td>
+                <td>234</td>
+                <td>432</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>23</td>
+                <td>57</td>
+                <td>7</td>
+                <td>34</td>
+                <td>472</td>
+            </tr>
+            <tr>
+                <td>3435</td>
+                <td>234</td>
+                <td>567</td>
+                <td>87</td>
+                <td>234</td>
+                <td>432</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <table id="example2">
+        <thead>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>35</td>
+                <td>234</td>
+                <td>567</td>
+                <td>87</td>
+                <td>234</td>
+                <td>432</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>23</td>
+                <td>57</td>
+                <td>7</td>
+                <td>34</td>
+                <td>472</td>
+            </tr>
+            <tr>
+                <td>35</td>
+                <td>234</td>
+                <td>567</td>
+                <td>87</td>
+                <td>234</td>
+                <td>432</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <!-- ############################################### -->
+    <table id="example3">
+        <thead>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>-12</td>
+            </tr>
+            <tr>
+                <td>-456</td>
+                <td>-43</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>78</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>34</td>
+            </tr>
 
-		</tbody>
-	</table>
+        </tbody>
+    </table>
 
-	<script>
-	// example 1 / all
-	tableMinMax({
-		"table": "#example1"
-	});
+    <script>
+        // example 1 / all
+        tableMinMax({
+            "table": "#example1"
+        });
 
-	// example 2 / all / cell
-	tableMinMax({
-		"table": "#example2",
-		"css": {
-			"min": "minT",
-			"max": "maxT"
-		},
-		"colorize": "cell"
-	});
-	// example 2 / row / span
-	tableMinMax({
-		"table": "#example2",
-		"search": {
-			"mode": "row",
-			"nr": "2"
-		},
-		"css": {
-			"min": "min mSpan",
-			"max": "max mSpan"
-		}
-	});
+        // example 2 / all / cell
+        tableMinMax({
+            "table": "#example2",
+            "css": {
+                "min": "minT",
+                "max": "maxT"
+            },
+            "colorize": "cell"
+        });
+        // example 2 / row / span
+        tableMinMax({
+            "table": "#example2",
+            "search": {
+                "mode": "row",
+                "nr": "2"
+            },
+            "css": {
+                "min": "min mSpan",
+                "max": "max mSpan"
+            }
+        });
 
-	// aexample 3 / column /
-	tableMinMax({
-		"table": "#example3",
-		"search": {
-			"mode": "col",
-			"nr": "2"
-		},
-		"css": {
-			"min": "min mSpan",
-			"max": "max mSpan"
-		}
-	});
-	</script>
+        // aexample 3 / column /
+        tableMinMax({
+            "table": "#example3",
+            "search": {
+                "mode": "col",
+                "nr": "2"
+            },
+            "css": {
+                "min": "min mSpan",
+                "max": "max mSpan"
+            }
+        });
+    </script>
 </body>
+
 </html>
