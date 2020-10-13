@@ -118,8 +118,8 @@ tableMinMax({
 ## ToDo
 
 - [x] Abhängkeit von jQuery entfernen
-- [ ] Parameter überprüfen
-- [ ] Mehrere Spalten / Reiehen gleichzeitig übergeben
+- [ ] Alle Parameter überprüfen
+- [ ] Mehrere Spalten / Reihen gleichzeitig übergeben
 - [ ] gleiche Werte ebenfalls markieren
  ___
 
