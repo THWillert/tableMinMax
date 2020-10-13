@@ -19,6 +19,11 @@ Im Beispiel: Spaltenweise Min/Max-Werte
 - Zelle komplett oder SPAN (mit Werten)  markieren
 - Übergabe von CSS-Klassen
 - Übergabe der Parameter (teilweise) per DATA-Attribut.
+- Wird color2k eingebunden, wird die Text-Farbe automatisch entsprechend der Hintergrund-Farbe angepaßt.
+
+https://github.com/ricokahler/color2k
+
+https://www.jsdelivr.com/package/npm/color2k
 
 ___
 
@@ -126,7 +131,7 @@ tableMinMax({
 ## Author
 Thorsten Willert
 
-[Homepage](https://www.thorsten-willert.de/)
+[Homepage](https://www.thorsten-willert.de/software/javascript/tableminmax)
 
 ## Lizenz
 Das ganze steht unter der [MIT](https://github.com/THWillert/tableMinMax/blob/master/LICENSE) Lizenz.
