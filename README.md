@@ -19,7 +19,8 @@ Im Beispiel: Spaltenweise Min/Max-Werte
 - Zelle komplett oder SPAN (mit Werten)  markieren
 - Übergabe von CSS-Klassen
 - Übergabe der Parameter (teilweise) per DATA-Attribut.
-- Wird color2k eingebunden, wird die Text-Farbe automatisch entsprechend der Hintergrund-Farbe angepaßt.
+- Rückgabe der Min/Max Werte als Array.
+- Ist **color2k** eingebunden, wird die Text-Farbe automatisch entsprechend der Hintergrund-Farbe angepaßt.
 
 https://github.com/ricokahler/color2k
 
