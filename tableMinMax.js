@@ -1,13 +1,21 @@
 
 
 // (c) 2020 Thorsten Willert
-// V1.4
+// V1.43
 // This code is licensed under MIT license
 
 tableMinMax = function (oOptions) {
     /*
     	Sets css-classes to the min/max-values in a table, row or column.
     --------------------------------------------------------------------------------
+
+    	V1.43
+    	- fixed warning: var declaration
+    	- fixed error with data-autocontrast
+
+    	V1.42
+    	- fixed: error with automatic contrast mode and multiple, trailing and
+    	leading spaces in class options
 
     	V1.41
     	- fixed: automatic contrast mode
@@ -141,20 +149,24 @@ tableMinMax = function (oOptions) {
 
     if (oTable.hasAttribute("data-search-nr"))
         settings.search.nr = oTable.getAttribute("data-search-nr");
-    settings.search.nr = Math.abs(settings.search.nr - 1);
+        settings.search.nr = Math.abs(settings.search.nr - 1);
 
     /*
     if (oTable.hasAttribute("data-css-mode"))
         settings.css.mode = oTable.getAttribute("data-css-mode");
     */
     if (oTable.hasAttribute("data-autocontrast"))
-        settings.text.autocontrast = oTable.getAttribute("data-autocontrast");
+        settings.text.autocontrast = (oTable.getAttribute("data-autocontrast") == "true");
 
     if (oTable.hasAttribute("data-css-min"))
         settings.css.min = oTable.getAttribute("data-css-min");
 
+    	settings.css.min = settings.css.min.trim().replace(/\s\s+/g, ' ')
+
     if (oTable.hasAttribute("data-css-max"))
         settings.css.max = oTable.getAttribute("data-css-max");
+
+    	settings.css.max = settings.css.max.trim().replace(/\s\s+/g, ' ')
 
     if (oTable.hasAttribute("data-colorize"))
         settings.css.max = oTable.getAttribute("data-colorize");
@@ -162,6 +174,7 @@ tableMinMax = function (oOptions) {
 
     // search min / max ========================================================
     switch (settings.search.mode.toString()) {
+    	let val
         // ---------------------------------------------------------------------
         case 'col':
             // search min / max values in column
