@@ -1,3 +1,11 @@
+V1.43
+- fixed warning: var declaration
+- fixed error with data-autocontrast
+
+V1.42
+- fixed: error with automatic contrast mode and multiple, trailing and
+leading spaces in class options
+
 V1.41
 - fixed: automatic contrast mode
 
