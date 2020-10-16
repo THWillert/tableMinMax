@@ -1,7 +1,5 @@
-
-
 // (c) 2020 Thorsten Willert
-// V1.43
+// V1.431
 // This code is licensed under MIT license
 
 tableMinMax = function (oOptions) {
@@ -173,8 +171,8 @@ tableMinMax = function (oOptions) {
 
 
     // search min / max ========================================================
+    let val;
     switch (settings.search.mode.toString()) {
-    	let val
         // ---------------------------------------------------------------------
         case 'col':
             // search min / max values in column
