@@ -1,3 +1,6 @@
+V1.431
+- fixed warning: var declaration ... again
+
 V1.43
 - fixed warning: var declaration
 - fixed error with data-autocontrast
