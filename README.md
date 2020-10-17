@@ -9,8 +9,6 @@ ____
 
 ![Ergebnis](https://www.thorsten-willert.de/images/Software/JavaScript/Thorsten_H_Willert_-_JavaScript_tableMinMax_Beispiel-Tabelle.png)
 
-Im Beispiel: Spaltenweise Min/Max-Werte
-
 ### Features
 
 - Werte in einzelner Spalte markieren
