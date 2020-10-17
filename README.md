@@ -7,7 +7,7 @@ JavaScript das die Minimum / Maximum Werte, einer HTML-Tabelle einfärbt.
 
 ____
 
-![Ergebnis](/images/tableMinMax.png)
+![Ergebnis](https://www.thorsten-willert.de/images/Software/JavaScript/Thorsten_H_Willert_-_JavaScript_tableMinMax_Beispiel-Tabelle.png)
 
 Im Beispiel: Spaltenweise Min/Max-Werte
 
