@@ -147,24 +147,25 @@ tableMinMax = function (oOptions) {
 
     if (oTable.hasAttribute("data-search-nr"))
         settings.search.nr = oTable.getAttribute("data-search-nr");
-        settings.search.nr = Math.abs(settings.search.nr - 1);
+    
+    settings.search.nr = Math.abs(settings.search.nr - 1);
 
     /*
     if (oTable.hasAttribute("data-css-mode"))
         settings.css.mode = oTable.getAttribute("data-css-mode");
     */
     if (oTable.hasAttribute("data-autocontrast"))
-        settings.text.autocontrast = (oTable.getAttribute("data-autocontrast") == "true");
+        settings.text.autocontrast = (oTable.getAttribute("data-autocontrast") === "true");
 
     if (oTable.hasAttribute("data-css-min"))
         settings.css.min = oTable.getAttribute("data-css-min");
 
-    	settings.css.min = settings.css.min.trim().replace(/\s\s+/g, ' ')
+    settings.css.min = settings.css.min.trim().replace(/\s\s+/g, ' ')
 
     if (oTable.hasAttribute("data-css-max"))
         settings.css.max = oTable.getAttribute("data-css-max");
 
-    	settings.css.max = settings.css.max.trim().replace(/\s\s+/g, ' ')
+    settings.css.max = settings.css.max.trim().replace(/\s\s+/g, ' ')
 
     if (oTable.hasAttribute("data-colorize"))
         settings.css.max = oTable.getAttribute("data-colorize");
