@@ -19,7 +19,6 @@ ____
 - Werte der gesamten Tabelle markieren
 - Mehrere Spalten oder Zeilen gleichzeitig markieren
 - Zelle komplett oder SPAN (mit Werten)  markieren
-- Werte unterhalb und /oder über Grenzwerten markieren
 - Übergabe von CSS-Klassen
 - Übergabe der Parameter (teilweise) per DATA-Attribut.
 - Rückgabe der Min/Max Werte als Array.
@@ -127,8 +126,9 @@ tableMinMax({
 ## ToDo
 
 - [x] Abhängkeit von jQuery entfernen
+- [x] Mehrere Spalten / Reihen gleichzeitig übergeben
+- [ ] Werte unterhalb und /oder über Grenzwerten markieren
 - [ ] Alle Parameter überprüfen
-- [ ] Mehrere Spalten / Reihen gleichzeitig übergeben
 - [ ] gleiche Werte ebenfalls markieren
  ___
 
