@@ -1,5 +1,5 @@
 // (c) 2020 Thorsten Willert
-// V1.431
+// V2.0
 // This code is licensed under MIT license
 
 tableMinMax = function (oOptions) {
@@ -92,6 +92,10 @@ tableMinMax = function (oOptions) {
             mode: 'all',
             nr: 1
         },
+        limit: {
+        	min: 'min',
+        	max: 'max'
+        },
         css: {
             mode: 'style',
             max: '',
@@ -147,7 +151,7 @@ tableMinMax = function (oOptions) {
 
     if (oTable.hasAttribute("data-search-nr"))
         settings.search.nr = oTable.getAttribute("data-search-nr");
-    
+
     settings.search.nr = Math.abs(settings.search.nr - 1);
 
     /*
@@ -194,6 +198,7 @@ tableMinMax = function (oOptions) {
             // cells
             min_c = oTbody.rows[min_i].cells[settings.search.nr];
             max_c = oTbody.rows[max_i].cells[settings.search.nr];
+            mark(min_c,max_c,settings)
 
             break;
             // ---------------------------------------------------------------------
@@ -219,6 +224,7 @@ tableMinMax = function (oOptions) {
             // cells
             min_c = oTbody.rows[settings.search.nr].cells[min_i];
             max_c = oTbody.rows[settings.search.nr].cells[max_i];
+            mark(min_c,max_c,settings)
 
             break;
             // ---------------------------------------------------------------------
@@ -245,63 +251,66 @@ tableMinMax = function (oOptions) {
             }
             min_c = oTbody.rows[min_i].cells[min_col];
             max_c = oTbody.rows[max_i].cells[max_col];
+            mark(min_c,max_c,settings)
     }
 
     // -------------------------------------------------------------------------
-    // invert min / max colors
-    if (settings.invert === true) {
-        [min_c, max_c] = [max_c, min_c];
-    }
+    function mark(min_c,max_c,settings) {
+    	// invert min / max colors
+		if (settings.invert === true) {
+			[min_c, max_c] = [max_c, min_c];
+		}
 
-    // set classes to cell / span
-    if (settings.colorize === 'span') {
+		// set classes to cell / span
+		if (settings.colorize === 'span') {
 
-        min_c.innerHTML = '<span class="' + settings.css.min + '">' + min_c.innerHTML + '</span>';
-        max_c.innerHTML = '<span class="' + settings.css.max + '">' + max_c.innerHTML + '</span>';
+			min_c.innerHTML = '<span class="' + settings.css.min + '">' + min_c.innerHTML + '</span>';
+			max_c.innerHTML = '<span class="' + settings.css.max + '">' + max_c.innerHTML + '</span>';
 
-    }
-    else {
+		}
+		else {
 
-        min_c.className += settings.css.min;
-        max_c.className += settings.css.max;
+			min_c.className += settings.css.min;
+			max_c.className += settings.css.max;
+		}
 
+		//--------------------------------------------------------------------------
+		// if color2k.js is loaded
+		try {
+			let color
 
-    }
+			if (typeof color2k.hasBadContrast == 'function') {
+				console.log("color2k loaded")
 
-    //--------------------------------------------------------------------------
-    // if color2k.js is loaded
-    try {
-        let color
+				if (settings.text.autocontrast === true) {
+					setColor(min_c, settings.css.min, settings.text.standard)
+					setColor(max_c, settings.css.max, settings.text.standard)
+				}
+			}
+			else {
+				console.log("color2k not loaded")
+			}
+		}
+		catch (e) {
+			 console.log(e)
+		};
+	};
 
-        if (typeof color2k.hasBadContrast == 'function') {
-            console.log("color2k loaded")
+	function setColor(oObj, minMax, settings) {
+		color = window.getComputedStyle(document.querySelector(String2Classes(minMax))).getPropertyValue("background-color")
+		if (color2k.hasBadContrast(color, standard) === false) {
+			oObj.style.color = '#fff'
+		}
+		else {
+			oObj.style.color = '#000'
+		}
+	}
 
-            if (settings.text.autocontrast === true) {
-
-                color = window.getComputedStyle(document.querySelector(String2Classes(settings.css.min))).getPropertyValue("background-color")
-                if (color2k.hasBadContrast(color, settings.text.standard) === false) {
-                    min_c.style.color = '#fff'
-                }
-                else {
-                    min_c.style.color = '#000'
-                }
-
-                color = window.getComputedStyle(document.querySelector(String2Classes(settings.css.max))).getPropertyValue("background-color")
-                if (color2k.hasBadContrast(color, settings.text.standard) === true) {
-                    max_c.style.color = '#000'
-                }
-                else {
-                    max_c.style.color = '#fff'
-                }
-            }
-        }
-        else {
-            console.log("color2k not loaded")
-        }
-    }
-    catch (e) {
-    	 console.log(e)
-    };
+    // converts the css-classes from html to a selector for "querySelector"
+    function String2Classes(string) {
+		const classes = string.split(' ')
+		return '.' + classes.join('.')
+	}
 
     return [min, max]
 };
@@ -318,10 +327,4 @@ function extend(target, source) {
         }
     }
     return target;
-}
-
-// converts the css-classes from html to a selector for "querySelector"
-function String2Classes(string) {
-    const classes = string.split(' ')
-    return '.' + classes.join('.')
 }
