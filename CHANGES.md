@@ -1,3 +1,6 @@
+V2.0
+- changed: Row and Col numbers are now passed as array. So only one call is needed at a time.
+
 V1.431
 - fixed warning: var declaration ... again
 
