@@ -1,0 +1,26 @@
+{
+  "name": "tableMinMax",
+  "version": "V2.0",
+  "description": "JavaScript that colors the min / max values of a HTML table.",
+  "main": "dist/tableMinMax.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/THWillert/tableMinMax.git"
+  },
+  "keywords": [
+    "table",
+    "html",
+    "color",
+    "minimum",
+    "maximum",
+    "colour",
+    "css",
+    "javascript",
+    "jquery"
+  ],
+  "author": "Thorsten Willert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/THWillert/tableMinMax/issues"
+  }
+}
