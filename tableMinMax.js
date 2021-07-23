@@ -1,8 +1,8 @@
 // (c) 2021 Thorsten Willert
 // V2.1
 // This code is licensed under MIT license
-tableMinMax = function (oOptions) {
-  /*
+tableMinMax = function(oOptions) {
+    /*
     Sets css-classes to the min/max-values in a table, row or column.
     --------------------------------------------------------------------------------
     V2.1
@@ -89,219 +89,226 @@ tableMinMax = function (oOptions) {
         true: min / max classes are swaped
 
     */
-  const settings = extend({
-    table: 'table',
-    search: {
-      mode: 'all',
-      nr: [1]
-    },
-    limit: {
-      min: 'min',
-      max: 'max'
-    },
-    css: {
-      mode: 'style',
-      max: '',
-      min: ''
-    },
-    text: {
-      autocontrast: true,
-      standard: 'readable',
-      min: '#fff',
-      max: '#000'
-    },
-    colorize: 'span',
-    mode: 'single',
-    invert: false
-  }, oOptions)
-  // init ===================================================================
-  let min = Number.MAX_VALUE
-  let max = Number.MIN_VALUE
-  let min_i = 0
-  let max_i = 0
-  let min_col = 0
-  let max_col = 0
-  let iCols = 0
-  let iRows = 0
-  let oTable = null
-  let oTbody = null
-  let min_c = null
-  let max_c = null
-  // 1. simple parameter-check ==============================================
-  try {
-    oTable = document.querySelector(settings.table)
-    if (oTable === null) {
-      console.log('tableMinMax: table not found: ' + settings.table + '\n' + 'Function call after table init? (e.g. end of body)')
-      return [-1, -1]
+    const settings = extend({
+        table: 'table',
+        search: {
+            mode: 'all',
+            nr: [1]
+        },
+        limit: {
+            min: 'min',
+            max: 'max'
+        },
+        css: {
+            mode: 'style',
+            max: '',
+            min: ''
+        },
+        text: {
+            autocontrast: true,
+            standard: 'readable',
+            min: '#fff',
+            max: '#000'
+        },
+        colorize: 'span',
+        mode: 'single',
+        invert: false
+    }, oOptions)
+    // init ===================================================================
+    let min = Number.MAX_VALUE
+    let max = Number.MIN_VALUE
+    let min_i = 0
+    let max_i = 0
+    let min_col = 0
+    let max_col = 0
+    let iCols = 0
+    let iRows = 0
+    let oTable = null
+    let oTbody = null
+    let min_c = null
+    let max_c = null
+
+    // 1. simple parameter-check ==============================================
+    try {
+        oTable = document.querySelector(settings.table)
+        if (oTable === null) {
+            console.log(`tableMinMax: table not found: ${settings.table} \n Function call after table init? (e.g. end of body)`)
+            return [-1, -1]
+        }
+        oTbody = document.querySelector(settings.table + ' tbody')
+        iRows = oTbody.rows.length
+    } catch (e) {
+        console.error(e)
+        return [-1, -1]
     }
-    oTbody = document.querySelector(settings.table + ' tbody')
-    iRows = oTbody.rows.length
-  } catch (e) {
-    console.error(e)
-    return [-1, -1]
-  }
-  // data ====================================================================
-  if (oTable.hasAttribute('data-search-mode')) {
-    settings.search.mode = oTable.getAttribute('data-search-mode')
-  }
-  if (oTable.hasAttribute('data-search-nr')) {
-    settings.search.nr = oTable.getAttribute('data-search-nr')
-  }
-  /*
+
+    // data ====================================================================
+    if (oTable.hasAttribute('data-search-mode')) {
+        settings.search.mode = oTable.getAttribute('data-search-mode')
+    }
+    if (oTable.hasAttribute('data-search-nr')) {
+        settings.search.nr = oTable.getAttribute('data-search-nr')
+    }
+    /*
       if (oTable.hasAttribute("data-css-mode"))
           settings.css.mode = oTable.getAttribute("data-css-mode");
       */
-  if (oTable.hasAttribute('data-autocontrast')) {
-    settings.text.autocontrast = (oTable.getAttribute('data-autocontrast') === 'true')
-  }
-  if (oTable.hasAttribute('data-css-min')) {
-    settings.css.min = oTable.getAttribute('data-css-min')
-  }
-  settings.css.min = settings.css.min.trim().replace(/\s\s+/g, ' ')
-  if (oTable.hasAttribute('data-css-max')) {
-    settings.css.max = oTable.getAttribute('data-css-max')
-  }
-  settings.css.max = settings.css.max.trim().replace(/\s\s+/g, ' ')
-  if (oTable.hasAttribute('data-colorize')) {
-    settings.css.max = oTable.getAttribute('data-colorize')
-  }
-  // search min / max ========================================================
-  let val
-  const length = settings.search.nr.length
-  let oNr
-  switch (settings.search.mode.toString()) {
-    // ---------------------------------------------------------------------
-    case 'col':
-      // search min / max values in column
-      for (let j = 0; j < length; j++) {
-        // reset for new min/max
-        min = Number.MAX_VALUE
-        max = Number.MIN_VALUE
-        for (let i = 0; i < iRows; i++) {
-          oNr = settings.search.nr[j]
-          val = parseFloat(oTbody.rows[i].cells[oNr.innerText])
-          if (val > max) {
-            max = val
-            max_i = i
-            continue
-          }
-          if (val < min) {
-            min = val
-            min_i = i
-          }
-        }
-        // cells
-        min_c = oTbody.rows[min_i].cells[oNr]
-        max_c = oTbody.rows[max_i].cells[oNr]
-        mark(min_c, max_c, settings)
-      }
-      break
-      // ---------------------------------------------------------------------
-    case 'row':
-      // search min / max values in row
-      for (let j = 0; j < length; j++) {
-        // reset for new min/max
-        min = Number.MAX_VALUE
-        max = Number.MIN_VALUE
-        oNr = settings.search.nr[j]
-        iCols = oTbody.rows[j].cells.length
-        for (let i = 0; i < iCols; i++) {
-          val = parseFloat(oTbody.rows[oNr].cells[i].innerText)
-          if (val > max) {
-            max = val
-            max_i = i
-            continue
-          }
-          if (val < min) {
-            min = val
-            min_i = i
-          }
-        }
-        // cells
-        min_c = oTbody.rows[oNr].cells[min_i]
-        max_c = oTbody.rows[oNr].cells[max_i]
-        mark(min_c, max_c, settings)
-      }
-      break
-      // ---------------------------------------------------------------------
-    default:
-      // search min / max values in table
-      for (let i = 0; i < iRows; i++) {
-        iCols = oTbody.rows[i].cells.length
-        for (let j = 0; j < iCols; j++) {
-          val = parseFloat(oTbody.rows[i].cells[j].innerText)
-          if (val > max) {
-            max = val
-            max_i = i
-            max_col = j
-            continue
-          }
-          if (val < min) {
-            min = val
-            min_i = i
-            min_col = j
-          }
-        }
-      }
-      min_c = oTbody.rows[min_i].cells[min_col]
-      max_c = oTbody.rows[max_i].cells[max_col]
-      mark(min_c, max_c, settings)
-  }
-  // -------------------------------------------------------------------------
-  function mark (min_c, max_c, settings) {
-    // invert min / max colors
-    if (settings.invert === true) {
-      [min_c, max_c] = [max_c, min_c]
+    if (oTable.hasAttribute('data-autocontrast')) {
+        settings.text.autocontrast = (oTable.getAttribute('data-autocontrast') === 'true')
     }
-    // set classes to cell / span
-    if (settings.colorize === 'span') {
-      min_c.innerHTML = '<span class="' + settings.css.min + '">' + min_c.innerHTML + '</span>'
-      max_c.innerHTML = '<span class="' + settings.css.max + '">' + max_c.innerHTML + '</span>'
-    } else {
-      min_c.className += settings.css.min
-      max_c.className += settings.css.max
+    if (oTable.hasAttribute('data-css-min')) {
+        settings.css.min = oTable.getAttribute('data-css-min')
     }
-    // --------------------------------------------------------------------------
-    // if color2k.js is loaded
-    try {
-      if (typeof color2k.hasBadContrast === 'function') {
-        console.log('color2k loaded')
-        if (settings.text.autocontrast === true) {
-          setColor(min_c, settings.css.min, settings.text.standard)
-          setColor(max_c, settings.css.max, settings.text.standard)
+    settings.css.min = settings.css.min.trim().replace(/\s\s+/g, ' ')
+
+    if (oTable.hasAttribute('data-css-max')) {
+        settings.css.max = oTable.getAttribute('data-css-max')
+    }
+    settings.css.max = settings.css.max.trim().replace(/\s\s+/g, ' ')
+    if (oTable.hasAttribute('data-colorize')) {
+        settings.css.max = oTable.getAttribute('data-colorize')
+    }
+    // search min / max ========================================================
+    let val
+    const length = settings.search.nr.length
+    let oNr
+
+    switch (settings.search.mode.toString()) {
+        // ---------------------------------------------------------------------
+        case 'col':
+            // search min / max values in column
+            for (let j = 0; j < length; j++) {
+                // reset for new min/max
+                min = Number.MAX_VALUE
+                max = Number.MIN_VALUE
+
+                for (let i = 0; i < iRows; i++) {
+                    oNr = settings.search.nr[j]
+                    val = parseFloat(oTbody.rows[i].cells[oNr.innerText])
+                    if (val > max) {
+                        max = val
+                        max_i = i
+                        continue
+                    }
+                    if (val < min) {
+                        min = val
+                        min_i = i
+                    }
+                }
+                // cells
+                min_c = oTbody.rows[min_i].cells[oNr]
+                max_c = oTbody.rows[max_i].cells[oNr]
+                mark(min_c, max_c, settings)
+            }
+            break
+            // ---------------------------------------------------------------------
+        case 'row':
+            // search min / max values in row
+            for (let j = 0; j < length; j++) {
+                // reset for new min/max
+                min = Number.MAX_VALUE
+                max = Number.MIN_VALUE
+                oNr = settings.search.nr[j]
+                iCols = oTbody.rows[j].cells.length
+
+                for (let i = 0; i < iCols; i++) {
+                    val = parseFloat(oTbody.rows[oNr].cells[i].innerText)
+                    if (val > max) {
+                        max = val
+                        max_i = i
+                        continue
+                    }
+                    if (val < min) {
+                        min = val
+                        min_i = i
+                    }
+                }
+                // cells
+                min_c = oTbody.rows[oNr].cells[min_i]
+                max_c = oTbody.rows[oNr].cells[max_i]
+                mark(min_c, max_c, settings)
+            }
+            break
+            // ---------------------------------------------------------------------
+        default:
+            // search min / max values in table
+            for (let i = 0; i < iRows; i++) {
+                iCols = oTbody.rows[i].cells.length
+
+                for (let j = 0; j < iCols; j++) {
+                    val = parseFloat(oTbody.rows[i].cells[j].innerText)
+                    if (val > max) {
+                        max = val
+                        max_i = i
+                        max_col = j
+                        continue
+                    }
+                    if (val < min) {
+                        min = val
+                        min_i = i
+                        min_col = j
+                    }
+                }
+            }
+            min_c = oTbody.rows[min_i].cells[min_col]
+            max_c = oTbody.rows[max_i].cells[max_col]
+            mark(min_c, max_c, settings)
+    }
+    // -------------------------------------------------------------------------
+    function mark(min_c, max_c, settings) {
+        // invert min / max colors
+        if (settings.invert === true) {
+			[min_c, max_c] = [max_c, min_c]
         }
-      } else {
-        console.log('color2k not loaded')
-      }
-    } catch (e) {
-      console.log(e)
+        // set classes to cell / span
+        if (settings.colorize === 'span') {
+            min_c.innerHTML = `<span class="${settings.css.min}">${min_c.innerHTML}</span>`
+            max_c.innerHTML = `<span class="${settings.css.max}">${max_c.innerHTML}</span>`
+        } else {
+            min_c.className += settings.css.min
+            max_c.className += settings.css.max
+        }
+        // --------------------------------------------------------------------------
+        // if color2k.js is loaded
+        try {
+            if (typeof color2k.hasBadContrast === 'function') {
+                console.log('color2k loaded')
+                if (settings.text.autocontrast === true) {
+                    setColor(min_c, settings.css.min, settings.text.standard)
+                    setColor(max_c, settings.css.max, settings.text.standard)
+                }
+            } else {
+                console.log('color2k not loaded')
+            }
+        } catch (e) {
+            console.log(e)
+        };
     };
-  };
 
-  function setColor (oObj, minMax, standard) {
-    const color = window.getComputedStyle(document.querySelector(String2Classes(minMax))).getPropertyValue('background-color')
-    if (color2k.hasBadContrast(color, standard) === false) {
-      oObj.style.color = '#fff'
-    } else {
-      oObj.style.color = '#000'
+    function setColor(oObj, minMax, standard) {
+        const color = window.getComputedStyle(document.querySelector(String2Classes(minMax))).getPropertyValue('background-color')
+        if (color2k.hasBadContrast(color, standard) === false) {
+            oObj.style.color = '#fff'
+        } else {
+            oObj.style.color = '#000'
+        }
     }
-  }
-  // converts the css-classes from html to a selector for "querySelector"
-  function String2Classes (string) {
-    const classes = string.split(' ')
-    return '.' + classes.join('.')
-  }
+    // converts the css-classes from html to a selector for "querySelector"
+    function String2Classes(string) {
+        const classes = string.split(' ')
+        return '.' + classes.join('.')
+    }
 
-  function extend (target, source) {
-    target = target || {}
-    for (var prop in source) {
-      if (typeof source[prop] === 'object') {
-        target[prop] = extend(target[prop], source[prop])
-      } else {
-        target[prop] = source[prop]
-      }
+    function extend(target, source) {
+        target = target || {}
+        for (var prop in source) {
+            if (typeof source[prop] === 'object') {
+                target[prop] = extend(target[prop], source[prop])
+            } else {
+                target[prop] = source[prop]
+            }
+        }
+        return target
     }
-    return target
-  }
-  return [min, max]
+    return [min, max]
 }
