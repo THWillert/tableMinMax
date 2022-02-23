@@ -2,7 +2,7 @@
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/THWillert/tableMinMax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/THWillert/tableMinMax/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/THWillert/tableMinMax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/THWillert/tableMinMax/context:javascript)
-[![DeepScan grade](https://deepscan.io/api/teams/16969/projects/20289/branches/549501/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=16969&pid=20289&bid=549501)
+
 
 ## Übersicht
 JavaScript that colors the min / max values of a HTML table.
