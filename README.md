@@ -21,10 +21,6 @@ ____
 - Rückgabe der Min/Max Werte als Array.
 - Die Text-Farbe (schwarz/weis) wird automatisch an die Hintergrund-Farbe angepaßt.
 
-https://github.com/ricokahler/color2k
-
-https://www.jsdelivr.com/package/npm/color2k
-
 ___
 
 ## Voraussetzungen
@@ -124,7 +120,8 @@ tableMinMax({
 
 - [x] Abhängkeit von jQuery entfernen
 - [x] Mehrere Spalten / Reihen gleichzeitig übergeben
-- [ ] Werte unterhalb und /oder über Grenzwerten markieren
+- [x] Abhängigkeit von color2k entfernen 
+- [ ] Werte unterhalb und / oder über Grenzwerten markieren
 - [ ] Alle Parameter überprüfen
 - [ ] gleiche Werte ebenfalls markieren
  ___
