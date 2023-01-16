@@ -23,7 +23,7 @@ ____
 - Übergabe von CSS-Klassen
 - Übergabe der Parameter (teilweise) per DATA-Attribut.
 - Rückgabe der Min/Max Werte als Array.
-- Ist **color2k** eingebunden, wird die Text-Farbe automatisch entsprechend der Hintergrund-Farbe angepaßt.
+- Die Text-Farbe (schwarz/weis) wird automatisch an die Hintergrund-Farbe angepaßt.
 
 https://github.com/ricokahler/color2k
 
