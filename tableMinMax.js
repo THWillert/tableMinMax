@@ -6,6 +6,9 @@ tableMinMax = function (oOptions) {
     /*
     	Sets css-classes to the min/max-values in a table, row or column.
 
+    	V3.1
+    	- code cleanup
+
     	V3.0
     	- removed dependency for color2k
     --------------------------------------------------------------------------------
@@ -277,7 +280,6 @@ tableMinMax = function (oOptions) {
 
 			min_c.innerHTML = '<span class="' + settings.css.min + '">' + min_c.innerHTML + '</span>';
 			max_c.innerHTML = '<span class="' + settings.css.max + '">' + max_c.innerHTML + '</span>';
-
 		}
 		else {
 
@@ -287,18 +289,18 @@ tableMinMax = function (oOptions) {
 
 		//--------------------------------------------------------------------------
 		if (settings.text.autocontrast === true) {
-				setColor(min_c, settings.css.min, settings.text.threshold)
-				setColor(max_c, settings.css.max, settings.text.threshold)
+			setColor(min_c, settings.css.min)
+			setColor(max_c, settings.css.max)
 		}
 	};
 
-	function setColor(oObj, minMax, threshold) {
+	function setColor(oObj, minMax) {
 		color = window.getComputedStyle(document.querySelector(String2Classes(minMax))).getPropertyValue("background-color")
 
-		oObj.style.color = getCorrectTextColor(color, threshold, settings.text.light, settings.text.dark )
+		oObj.style.color = getCorrectTextColor(color,  settings.text.threshold, settings.text.light, settings.text.dark)
 	}
 
-	function getCorrectTextColor(rgba,th=130,light,dark){
+	function getCorrectTextColor(rgba, th, light, dark){
 		aC =  rgba.match(/[0-9.]+/gi)
 		if (aC.length < 3) return '#000'
 
