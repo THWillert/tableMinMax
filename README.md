@@ -120,10 +120,10 @@ tableMinMax({
 
 - [x] Abhängkeit von jQuery entfernen
 - [x] Mehrere Spalten / Reihen gleichzeitig übergeben
-- [x] Abhängigkeit von color2k entfernen 
+- [x] Abhängigkeit von color2k entfernen
+- [X] gleiche Werte ebenfalls markieren
 - [ ] Werte unterhalb und / oder über Grenzwerten markieren
 - [ ] Alle Parameter überprüfen
-- [ ] gleiche Werte ebenfalls markieren
  ___
 
 ## Author
