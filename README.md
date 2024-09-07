@@ -205,7 +205,7 @@ tableMinMax({
     mode: 'multi',
     invert: false
 });
-
+```
 ___
 
 ## ToDo
