@@ -156,7 +156,7 @@ tableMinMax({
     mode: 'multi',
     invert: false
 });
-
+```
 ___
 
 ## tableMinMax Guide
