@@ -5,7 +5,6 @@
  * 2023-2024
  */
 
-
 /**
  * Highlights minimum and maximum values in a table based on configuration.
  * Supports different search modes (row, column, all) and modes (single, multi).
@@ -49,11 +48,6 @@ const tableMinMax = (oOptions) => {
             light: '#fff',
             dark: '#000'
         },
-        valueRange: {
-            min: null,   // Minimaler Wert für die Markierung
-            max: null    // Maximaler Wert für die Markierung
-        },
-        operation: 'default',
         colorize: 'span',
         mode: 'single',
         invert: false,
@@ -136,52 +130,21 @@ const tableMinMax = (oOptions) => {
         cells.forEach(cell => {
             const val = parseFloat(cell.innerText);
             if (!isNaN(val)) {
-                switch (settings.operation) {
-                    case 'above':
-
-                        if (val > settings.valueRange.min) {
-                             console.log(val)
-                            maxCells.push(cell);
-                        }
-                        break;
-                    case 'below':
-                        if (val < settings.valueRange.max) {
-                            minCells.push(cell);
-                        }
-                        break;
-                    case 'aboveBelow':
-                        if (val > settings.valueRange.min) {
-                            maxCells.push(cell);
-                        }
-                        if (val < settings.valueRange.max) {
-                            minCells.push(cell);
-                        }
-                        break;
-                    case 'between':
-                        if (val > settings.valueRange.min && val < settings.valueRange.max) {
-                            maxCells.push(cell);
-                        }
-                        break;
-                    default: // 'default' Modus für min/max Ermittlung
-                        //console.log(val)
-                        if (val < min) {
-                            min = val;
-                            minCells = [cell];
-                        } else if (val === min) {
-                            minCells.push(cell);
-                        }
-                        if (val > max) {
-                            max = val;
-                            maxCells = [cell];
-                        } else if (val === max) {
-                            maxCells.push(cell);
-                        }
-                        break;
+                if (val < min) {
+                    min = val;
+                    minCells = [cell];
+                } else if (val === min) {
+                    minCells.push(cell);
+                }
+                if (val > max) {
+                    max = val;
+                    maxCells = [cell];
+                } else if (val === max) {
+                    maxCells.push(cell);
                 }
             }
         });
     };
-
 
     /**
      * Searches for minimum and maximum values in specified rows or columns.
@@ -243,7 +206,8 @@ const tableMinMax = (oOptions) => {
         }
 
         const markCells = (cells, cssClass) => {
-            cells.forEach(cell => {
+            cells.forEach((cell, index) => {
+                if (settings.mode === 'single' && index > 0) return;
                 if (settings.colorize === 'span') {
                     cell.innerHTML = `<span class="${cssClass}">${cell.innerHTML}</span>`;
                 } else {
@@ -255,14 +219,8 @@ const tableMinMax = (oOptions) => {
             });
         };
 
-        //console.log(maxCells)
-
-        if (['default', 'above', 'aboveBelow', 'between'].includes(settings.operation)) {
-            markCells(maxCells, settings.css.max);
-        }
-        if (['default', 'below', 'aboveBelow'].includes(settings.operation)) {
-            markCells(minCells, settings.css.min);
-        }
+        markCells(minCells, settings.css.min);
+        markCells(maxCells, settings.css.max);
     };
 
     /**
@@ -363,6 +321,6 @@ const tableMinMax = (oOptions) => {
         }
     }
 
-    //console.log(min + " " + max)
+    console.log(min + " " + max)
     return [min, max];
 };
