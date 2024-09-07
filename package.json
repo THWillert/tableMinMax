@@ -1,6 +1,6 @@
 {
   "name": "tableMinMax",
-  "version": "V2.0",
+  "version": "V4.0",
   "description": "JavaScript that colors the min / max values of a HTML table.",
   "main": "dist/tableMinMax.min.js",
   "repository": {
