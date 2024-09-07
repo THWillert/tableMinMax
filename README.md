@@ -14,7 +14,10 @@ ____
 - Werte in einzelne Reihe markieren
 - Werte der gesamten Tabelle markieren
 - Mehrere Spalten oder Zeilen gleichzeitig markieren
-- Zelle komplett oder SPAN (mit Werten)  markieren
+- Werte über Gruppen von Zeilen oder Spalten hinweg markieren
+- Werte in allen Zeilen/Saplten markieren, wobei jede Zeile/Spalte einzeln berechnet wird.
+- Zelle komplett (CELL) oder SPAN (mit Werten)  markieren.
+- Durch mehrfachen Aufruf, lassen sich auch Zeilen und Spalten bzw. gleichzeitg Min/Max der gesamten Tabelle markieren.
 - Übergabe von CSS-Klassen
 - Übergabe der Parameter (teilweise) per DATA-Attribut.
 - Rückgabe der Min/Max Werte als Array.
