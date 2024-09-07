@@ -1,6 +1,10 @@
 # tableMinMax
 
-## Deutsch
+## Overview
+
+The `tableMinMax` function allows you to highlight cells with minimum and maximum values in a table. You can configure the appearance and behavior of the highlighting through various parameters.
+
+___
 
 Die Funktion `tableMinMax` ermöglicht das Markieren von Zellen mit den minimalen und maximalen Werten in einer Tabelle. Sie können die Darstellung und das Verhalten der Markierung über verschiedene Parameter konfigurieren.
 
@@ -161,10 +165,6 @@ tableMinMax({
 });
 ```
 ___
-
-## tableMinMax Guide
-
-The `tableMinMax` function allows you to highlight cells with minimum and maximum values in a table. You can configure the appearance and behavior of the highlighting through various parameters.
 
 ### Parameters
 
