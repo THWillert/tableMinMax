@@ -1,213 +1,268 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="de">
 <head>
-    <meta charset="utf-8" (>
-    <title>tableMinMax Example 2</title>
-    <script src="tableMinMax.js"></script>
-    <script
-		src="https://cdn.jsdelivr.net/npm/color2k@1.1.0/index.js"
-		integrity="sha256-yCiK7OHQWsGGc5O9R0OJxGfpLHSqYGq3J2ptgI+Ngqk="
-		crossorigin="anonymous">
-	</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tableMinMax.js - different Tables</title>
+    <!-- Bootstrap CSS einbinden -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=" crossorigin="anonymous"></script>
     <style>
-        td,
-        th {
-            width: 5em;
+        td {
+            width: 20%;
             text-align: center;
-            border: solid 1px gray;
         }
 
-        .mSpan {
+        .min-highlight,
+        .max-highlight {
             display: inline-block;
-            padding: .1em;
-            min-width: 3em;
-            border-radius: .3em;
+            width: 4em;
+            border-radius: 0.3em;
         }
 
-        .min {
-            background-color: #DF0101;
-
+        .min-highlight {
+            background-color: #00E676;
         }
-
-        .max {
-            background-color: #01DFA4;
-
+        .max-highlight {
+            background-color: #FF3D00 ;
         }
-
-        .maxT {
-            background-color: #2F64FF;
-
+        .cell-min-highlight {
+            background-color: #00E5FF !important;
         }
-
-        .minT {
-            background-color: #FEBF00;
-
+        .cell-max-highlight {
+            background-color: #2979FF !important;
         }
     </style>
 </head>
-
 <body>
-    <table id="example1"
-    data-search-mode="all"
-    data-css-min="min mSpan"
-    data-css-max="max mSpan">
-        <thead>
-            <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>3435</td>
-                <td>234</td>
-                <td>567</td>
-                <td>87</td>
-                <td>234</td>
-                <td>432</td>
-            </tr>
-            <tr>
-                <td>34</td>
-                <td>23</td>
-                <td>57</td>
-                <td>7</td>
-                <td>34</td>
-                <td>472</td>
-            </tr>
-            <tr>
-                <td>3435</td>
-                <td>234</td>
-                <td>567</td>
-                <td>87</td>
-                <td>234</td>
-                <td>432</td>
-            </tr>
-        </tbody>
-    </table>
-    <hr>
-    <table id="example2">
-        <thead>
-            <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>35</td>
-                <td>234</td>
-                <td>567</td>
-                <td>2</td>
-                <td>234</td>
-                <td>432</td>
-            </tr>
-            <tr>
-                <td>45</td>
-                <td>23</td>
-                <td>57</td>
-                <td>7</td>
-                <td>34</td>
-                <td>472</td>
-            </tr>
-            <tr>
-                <td>35</td>
-                <td>234</td>
-                <td>567</td>
-                <td>87</td>
-                <td>234</td>
-                <td>432</td>
-            </tr>
-        </tbody>
-    </table>
-    <hr>
-    <!-- ############################################### -->
-    <table id="example3">
-        <thead>
-            <tr>
-                <th>1</th>
-                <th>2</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>3</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>456</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>-12</td>
-            </tr>
-            <tr>
-                <td>-456</td>
-                <td>-43</td>
-            </tr>
-            <tr>
-                <td>34</td>
-                <td>78</td>
-            </tr>
-            <tr>
-                <td>23</td>
-                <td>34</td>
-            </tr>
+    <div class="container mt-5">
+        <table class="table table-bordered" id="table1" data-mode="single">
+            <caption>Markierung der gesamten Tabelle (Single Mode)</caption>
+            <tbody>
+                <tr><td>12</td><td>45</td><td>78</td><td>23</td><td>56</td></tr>
+                <tr><td>34</td><td>67</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>78</td><td>90</td><td>34</td><td>45</td></tr>
+                <tr><td>23</td><td>89</td><td>45</td><td>67</td><td>78</td></tr>
+                <tr><td>90</td><td>12</td><td>34</td><td>56</td><td>89</td></tr>
+            </tbody>
+        </table>
 
-        </tbody>
-    </table>
+        <table class="table table-bordered" id="table2" data-mode="multi">
+            <caption>Markierung der gesamten Tabelle (Multi Mode)</caption>
+            <tbody>
+                <tr><td>12</td><td>45</td><td>12</td><td>23</td><td>56</td></tr>
+                <tr><td>34</td><td>67</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>12</td><td>12</td><td>34</td><td>45</td></tr>
+                <tr><td>23</td><td>89</td><td>45</td><td>12</td><td>78</td></tr>
+                <tr><td>12</td><td>12</td><td>34</td><td>56</td><td>89</td></tr>
+            </tbody>
+        </table>
 
+        <table class="table table-bordered" id="table3" data-search-mode="row" data-search-nr="2" data-mode="single">
+            <caption>Markierung einer Zeile (Single Mode)</caption>
+            <tbody>
+                <tr><td>12</td><td>45</td><td>78</td><td>23</td><td>56</td></tr>
+                <tr><td>34</td><td>67</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>90</td><td>78</td><td>90</td><td>34</td><td>90</td></tr>
+                <tr><td>23</td><td>89</td><td>45</td><td>67</td><td>78</td></tr>
+                <tr><td>78</td><td>12</td><td>34</td><td>56</td><td>89</td></tr>
+            </tbody>
+        </table>
+
+         <table class="table table-bordered" id="table4aa" data-search-mode="col" data-search-nr="1" data-mode="single">
+            <caption>Markierung einer Spalte (Single Mode)</caption>
+            <tbody>
+                <tr><td>12</td><td>12</td><td>78</td><td>23</td><td>12</td></tr>
+                <tr><td>34</td><td>13</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>15</td><td>12</td><td>34</td><td>45</td></tr>
+                <tr><td>23</td><td>12</td><td>45</td><td>12</td><td>78</td></tr>
+                <tr><td>78</td><td>12</td><td>34</td><td>56</td><td>89</td></tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered" id="table4" data-search-mode="col" data-search-nr="1" data-mode="multi">
+            <caption>Markierung einer Spalte (Multi Mode)</caption>
+            <tbody>
+                <tr><td>12</td><td>12</td><td>78</td><td>23</td><td>12</td></tr>
+                <tr><td>34</td><td>13</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>15</td><td>12</td><td>34</td><td>45</td></tr>
+                <tr><td>23</td><td>12</td><td>45</td><td>12</td><td>78</td></tr>
+                <tr><td>78</td><td>12</td><td>34</td><td>56</td><td>89</td></tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered" id="table4a" data-search-mode="col" data-search-nr="1,3" data-mode="multi">
+            <caption>Markierung mehrerer Spalten (Multi Mode)</caption>
+            <tbody>
+                <tr><td>12</td><td>12</td><td>78</td><td>23</td><td>12</td></tr>
+                <tr><td>34</td><td>13</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>15</td><td>12</td><td>34</td><td>45</td></tr>
+                <tr><td>23</td><td>12</td><td>45</td><td>12</td><td>78</td></tr>
+                <tr><td>78</td><td>12</td><td>34</td><td>56</td><td>89</td></tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered" id="table4b"
+               data-search-mode="col"
+               data-search-nr="1,3"
+
+               data-grouped="true"
+               data-css-min="min-highlight"
+               data-css-max="max-highlight">
+            <caption>Markierung mehrerer Spalten (Multi Mode + Grouped)</caption>
+            <tbody>
+                <tr><td>12</td><td>12</td><td>78</td><td>23</td><td>12</td></tr>
+                <tr><td>34</td><td>13</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>15</td><td>12</td><td>34</td><td>45</td></tr>
+                <tr><td>23</td><td>12</td><td>45</td><td>12</td><td>78</td></tr>
+                <tr><td>78</td><td>12</td><td>34</td><td>56</td><td>89</td></tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered" id="table5">
+            <caption>Gemischte Markierungen</caption>
+            <tbody>
+                <tr><td>45</td><td>12</td><td>78</td><td>23</td><td>56</td></tr>
+                <tr><td>34</td><td>67</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>89</td><td>12</td><td>34</td><td>89</td></tr>
+                <tr><td>23</td><td>89</td><td>45</td><td>12</td><td>45</td></tr>
+                <tr><td>12</td><td>12</td><td>34</td><td>56</td><td>80</td></tr>
+            </tbody>
+        </table>
+
+         <table class="table table-bordered" id="table6">
+            <caption>Markierungen für jede Zeile getrennt (Single Mode)</caption>
+            <tbody>
+                <tr><td>45</td><td>12</td><td>78</td><td>23</td><td>56</td></tr>
+                <tr><td>34</td><td>67</td><td>89</td><td>12</td><td>23</td></tr>
+                <tr><td>56</td><td>89</td><td>12</td><td>34</td><td>89</td></tr>
+                <tr><td>23</td><td>89</td><td>45</td><td>12</td><td>45</td></tr>
+                <tr><td>12</td><td>12</td><td>34</td><td>56</td><td>80</td></tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script src="tableMinMax.js"></script>
     <script>
-        // example 1 / all
         tableMinMax({
-            "table": "#example1"
-        });
-
-        // example 2 / all / cell
-        tableMinMax({
-            "table": "#example2",
-            "css": {
-                "min": "minT",
-                "max": "maxT"
-            },
-            "colorize": "cell"
-        });
-        // example 2 / row / span
-        tableMinMax({
-            "table": "#example2",
-            "search": {
-                "mode": "row",
-                "nr": [2]
-            },
-            "css": {
-                "min": "min mSpan",
-                "max": "max mSpan"
+            table: '#table1',
+            mode: 'single',
+            css: {
+                min: 'min-highlight',
+                max: 'max-highlight'
             }
         });
 
-        // aexample 3 / column /
         tableMinMax({
-            "table": "#example3",
-            "search": {
-                "mode": "col",
-                "nr": [1]
-            },
-            "css": {
-                "min": "min mSpan",
-                "max": "max mSpan"
+            table: '#table2',
+            mode: 'multi',
+            css: {
+                min: 'min-highlight',
+                max: 'max-highlight'
             }
         });
+
+        tableMinMax({
+            table: '#table3',
+            search: {
+                mode: 'row',
+                nr: [2]
+            },
+            mode: 'single',
+            css: {
+                min: 'min-highlight',
+                max: 'max-highlight'
+            }
+        });
+
+         tableMinMax({
+            table: '#table4aa',
+            search: {
+                mode: 'col',
+                nr: [1]
+            },
+            mode: 'single',
+            css: {
+                min: 'min-highlight',
+                max: 'max-highlight'
+            }
+        });
+
+        tableMinMax({
+            table: '#table4',
+            search: {
+                mode: 'col',
+                nr: [1]
+            },
+            mode: 'multi',
+            css: {
+                min: 'min-highlight',
+                max: 'max-highlight'
+            }
+        });
+
+        tableMinMax({
+            table: '#table4a',
+            search: {
+                mode: 'col',
+                nr: [1,3]
+            },
+            mode: 'multi',
+            css: {
+                min: 'min-highlight',
+                max: 'max-highlight'
+            }
+        });
+
+        tableMinMax({
+            table: '#table4b',
+            search: {
+                grouped: true
+            }
+        });
+
+        tableMinMax({
+            table: '#table5',
+            mode: 'multi',
+            colorize: 'cell',
+            search: {
+                mode: 'row',
+                nr: [2]
+            },
+            css: {
+                min: 'cell-min-highlight',
+                max: 'cell-max-highlight'
+            }
+        });
+
+        tableMinMax({
+            table: '#table5',
+            mode: 'multi',
+            colorize: 'span',
+            search: {
+                mode: 'col',
+                nr: [1]
+            },
+            css: {
+                min: 'min-highlight',
+                max: 'max-highlight'
+            }
+        });
+
+         tableMinMax({
+            table: '#table6',
+            mode: 'single',
+            colorize: 'cell',
+            search: {
+                mode: 'row',
+                nr: [-1]
+            },
+            css: {
+                min: 'cell-min-highlight',
+                max: 'cell-max-highlight'
+            }
+        });
+
     </script>
 </body>
-
 </html>
