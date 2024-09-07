@@ -1,3 +1,15 @@
+V4.0
+- Complete rebuild.
+- new: Single marking of min/max or all (multiple) min/max values.
+- new: Marking of min/max values over muliple rows/cols (grouped).
+- new: Marking of all rows/cols min/max values (number[-1]). Each row and column is evaluated individually.
+
+V3.1
+- code cleanup
+- 
+V3.0
+- removed dependency for color2k
+
 V2.0
 - changed: Row and Col numbers are now passed as array. So only one call is needed at a time.
 
